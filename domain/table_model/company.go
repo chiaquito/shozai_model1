@@ -1,7 +1,7 @@
 package table_model
 
 type Company struct {
-	ID   int    `json:"id"`
+	BaseModel
 	Name string `json:"name"`
 }
 

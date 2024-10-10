@@ -9,6 +9,8 @@ import (
 type Company interface {
 	Get(cond *table_model.Company) (*table_model.Company, error)
 	List(cond *table_model.Company) ([]*table_model.Company, error)
+	Create(m *table_model.Company) (*table_model.Company, error)
+	BulkCreate(m []*table_model.Company) ([]*table_model.Company, error)
 }
 
 type company struct {
@@ -33,4 +35,18 @@ func (r *company) List(cond *table_model.Company) ([]*table_model.Company, error
 		return nil, err
 	}
 	return companies, nil
+}
+
+func (r *company) Create(m *table_model.Company) (*table_model.Company, error) {
+	if err := r.db.Create(m).Error; err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (r *company) BulkCreate(m []*table_model.Company) ([]*table_model.Company, error) {
+	if err := r.db.Create(m).Error; err != nil {
+		return nil, err
+	}
+	return m, nil
 }

@@ -8,6 +8,8 @@ type GetCompanyByID struct {
 
 func (req GetCompanyByID) ToCompany() *table_model.Company {
 	return &table_model.Company{
-		ID: int(req.ID),
+		BaseModel: table_model.BaseModel{
+			ID: int(req.ID),
+		},
 	}
 }
