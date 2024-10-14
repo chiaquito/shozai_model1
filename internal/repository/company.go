@@ -1,9 +1,11 @@
 package repository
 
 import (
+	"errors"
+
 	"gorm.io/gorm"
 
-	"shozai_model1/domain/table_model"
+	"shozai_model1/internal/domain/table_model"
 )
 
 type Company interface {
@@ -24,6 +26,10 @@ func NewCompany(db *gorm.DB) *company {
 func (r *company) Get(cond *table_model.Company) (*table_model.Company, error) {
 	var company table_model.Company
 	if err := r.db.Take(&company, cond).Error; err != nil {
+		// ここをエラー定義したら変える
+		if errors.Is(err, errors.ErrUnsupported) {
+			return nil, errors.ErrUnsupported
+		}
 		return nil, err
 	}
 	return &company, nil

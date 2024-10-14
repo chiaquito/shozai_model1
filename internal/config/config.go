@@ -4,10 +4,12 @@ import (
 	"time"
 
 	"github.com/go-sql-driver/mysql"
+	"gorm.io/gorm"
 )
 
 type config struct {
-	DB *mysql.Config
+	DB   *mysql.Config
+	Gorm *gorm.Config
 }
 
 func New() *config {
@@ -15,7 +17,7 @@ func New() *config {
 	if err != nil {
 		// エラーハンドリング
 	}
-	dbConf := mysql.Config{
+	dbConf := &mysql.Config{
 		DBName:    "db",
 		User:      "root",
 		Passwd:    "password",
@@ -30,7 +32,12 @@ func New() *config {
 		},
 	}
 
+	gormConf := &gorm.Config{
+		CreateBatchSize: 1000,
+	}
+
 	return &config{
-		DB: &dbConf,
+		DB:   dbConf,
+		Gorm: gormConf,
 	}
 }

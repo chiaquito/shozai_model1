@@ -1,6 +1,6 @@
 package request
 
-import "shozai_model1/domain/table_model"
+import "shozai_model1/internal/domain/table_model"
 
 type GetCompanyByID struct {
 	ID int64 `param:"id" validate:"required"`

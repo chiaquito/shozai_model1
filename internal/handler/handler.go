@@ -1,6 +1,6 @@
 package handler
 
-import "shozai_model1/usecase"
+import "shozai_model1/internal/usecase"
 
 type Handler struct {
 	Hello   *hello

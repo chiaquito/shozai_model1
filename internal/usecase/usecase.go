@@ -1,6 +1,6 @@
 package usecase
 
-import "shozai_model1/repository"
+import "shozai_model1/internal/repository"
 
 type Usecase struct {
 	Company *company

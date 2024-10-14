@@ -2,7 +2,6 @@ package repository
 
 import "gorm.io/gorm"
 
-// type Repository interface{}
 type Repository struct {
 	Company *company
 }

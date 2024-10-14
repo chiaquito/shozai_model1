@@ -1,6 +1,6 @@
 package response
 
-import "shozai_model1/domain/table_model"
+import "shozai_model1/internal/domain/table_model"
 
 type Company struct {
 	ID   int64  `json:"id"`

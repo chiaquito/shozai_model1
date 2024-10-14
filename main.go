@@ -9,11 +9,11 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 
-	"shozai_model1/config"
-	"shozai_model1/handler"
-	"shozai_model1/repository"
-	"shozai_model1/route"
-	"shozai_model1/usecase"
+	"shozai_model1/internal/config"
+	"shozai_model1/internal/handler"
+	"shozai_model1/internal/repository"
+	"shozai_model1/internal/route"
+	"shozai_model1/internal/usecase"
 )
 
 type Validator struct {
@@ -28,7 +28,7 @@ func main() {
 
 	conf := config.New()
 
-	db, err := gorm.Open(mysql.Open(conf.DB.FormatDSN()))
+	db, err := gorm.Open(mysql.Open(conf.DB.FormatDSN()), conf.Gorm)
 	if err != nil {
 		log.Fatalf("Error opening database: %v", err)
 		panic(err)
