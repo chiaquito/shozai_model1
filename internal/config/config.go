@@ -18,10 +18,11 @@ func New() *config {
 		// エラーハンドリング
 	}
 	dbConf := &mysql.Config{
-		DBName:    "db",
-		User:      "root",
-		Passwd:    "password",
-		Addr:      "localhost:3306",
+		DBName: "db",
+		User:   "root",
+		Passwd: "password",
+		// Addr:      "localhost:3306",
+		Addr:      "db:3306",
 		Net:       "tcp",
 		ParseTime: true,
 		Collation: "utf8mb4_unicode_ci",
