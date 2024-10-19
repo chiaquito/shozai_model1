@@ -12,7 +12,7 @@ func NewRouter(h *handler.Handler) *echo.Echo {
 
 	api := e.Group("/api")
 	{
-		api.GET("/health", h.Hello.MyMethod)
+		api.GET("/health", h.Health.HealthCheck)
 
 		company := api.Group("/companies")
 		{

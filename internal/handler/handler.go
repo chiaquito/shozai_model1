@@ -3,19 +3,19 @@ package handler
 import "shozai_model1/internal/usecase"
 
 type Handler struct {
-	Hello   *hello
+	Health  *health
 	Company *company
 }
 
 func NewHandler(uc *usecase.Usecase) *Handler {
 
-	hello := &hello{}
+	health := &health{}
 	company := &company{
 		uc: uc.Company,
 	}
 
 	return &Handler{
-		Hello:   hello,
+		Health:  health,
 		Company: company,
 	}
 }
