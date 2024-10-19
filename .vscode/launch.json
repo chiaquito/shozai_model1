@@ -5,14 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Package in container",
+            "name": "Connect to container",
             "type": "go",
             "request": "attach",
             "mode": "remote",
             "remotePath": "/home/shozai_model",
             "port": 2345,
-            "host": "localhost",
-            "cwd": "${workspaceRoot}"
+            "host": "127.0.0.1",
             
         },
         {

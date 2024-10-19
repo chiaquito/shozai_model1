@@ -8,8 +8,7 @@ services:
       - "1323:1323"
       - "2345:2345"
     volumes:
-      - ./:/home/shozai_model
-    command: go run main.go
+       - ./:/home/shozai_model
     depends_on:
       - db
   db:
