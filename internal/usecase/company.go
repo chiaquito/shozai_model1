@@ -13,6 +13,7 @@ type Company interface {
 	ListCompany(c echo.Context) ([]*response.Company, error)
 	CreateCompany(c echo.Context) (*response.Company, error)
 	BulkCreateCompany(c echo.Context) ([]*response.Company, error)
+	UpdateCompany(c echo.Context) (*response.Company, error)
 }
 
 type company struct {
@@ -77,7 +78,11 @@ func (u *company) CreateCompany(c echo.Context) (*response.Company, error) {
 		return nil, err
 	}
 
-	m := req.ToCompany()
+	m, err := req.ToCompany()
+	if err != nil {
+		return nil, err
+	}
+
 	company, err := u.CompanyRepo.Create(m)
 	if err != nil {
 		return nil, err
@@ -96,10 +101,36 @@ func (u *company) BulkCreateCompany(c echo.Context) ([]*response.Company, error)
 		return nil, err
 	}
 
-	m := req.ToCompanies()
+	m, err := req.ToCompanies()
+	if err != nil {
+		return nil, err
+	}
 	companies, err := u.CompanyRepo.BulkCreate(m)
 	if err != nil {
 		return nil, err
 	}
 	return response.ToCompanies(companies), nil
+}
+
+func (u *company) UpdateCompany(c echo.Context) (*response.Company, error) {
+
+	var req request.UpdateCompany
+	if err := c.Bind(&req); err != nil {
+		return nil, err
+	}
+
+	if err := c.Validate(req); err != nil {
+		return nil, err
+	}
+
+	m, err := req.ToCompany()
+	if err != nil {
+		return nil, err
+	}
+
+	company, err := u.CompanyRepo.Update(m)
+	if err != nil {
+		return nil, err
+	}
+	return response.ToCompany(company), nil
 }

@@ -20,6 +20,8 @@ func NewRouter(h *handler.Handler) *echo.Echo {
 			company.GET("/:id", h.Company.GetCompanyByID)
 			company.POST("", h.Company.CreateCompany)
 			company.POST("/bulk", h.Company.BulkCreateCompany)
+			company.PUT("/:id", h.Company.UpdateCompany)
+
 		}
 	}
 	return e

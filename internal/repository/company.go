@@ -13,6 +13,7 @@ type Company interface {
 	List(cond *table_model.Company) ([]*table_model.Company, error)
 	Create(m *table_model.Company) (*table_model.Company, error)
 	BulkCreate(m []*table_model.Company) ([]*table_model.Company, error)
+	Update(m *table_model.Company) (*table_model.Company, error)
 }
 
 type company struct {
@@ -54,5 +55,19 @@ func (r *company) BulkCreate(m []*table_model.Company) ([]*table_model.Company, 
 	if err := r.db.Create(m).Error; err != nil {
 		return nil, err
 	}
+	return m, nil
+}
+
+func (r *company) Update(m *table_model.Company) (*table_model.Company, error) {
+	cond := &table_model.Company{BaseModel: table_model.BaseModel{ID: m.ID, Version: m.Version}}
+	if err := r.db.Take(&table_model.Company{}, cond).Error; err != nil {
+		return nil, err
+	}
+	m.Version++
+
+	if err := r.db.Debug().Model(cond).Updates(m).Error; err != nil {
+		return nil, err
+	}
+
 	return m, nil
 }

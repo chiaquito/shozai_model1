@@ -49,3 +49,11 @@ func (h *company) BulkCreateCompany(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, res)
 }
+
+func (h *company) UpdateCompany(c echo.Context) error {
+	res, err := h.uc.UpdateCompany(c)
+	if err != nil {
+		return err
+	}
+	return c.JSON(http.StatusOK, res)
+}
