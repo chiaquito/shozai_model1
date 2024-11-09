@@ -1,5 +1,5 @@
 .PHONY: run-local
-run:
+run-local:
 	go run ./main.go
 
 
