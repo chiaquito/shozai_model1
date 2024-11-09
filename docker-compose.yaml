@@ -20,5 +20,6 @@ services:
       - ./docker/database/init.d:/docker-entrypoint-initdb.d
       - ./docker/database/my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
-      MYSQL_DATABASE: db
-      MYSQL_ROOT_PASSWORD: password
+      - MYSQL_DATABASE=db
+      - MYSQL_ROOT_PASSWORD=password
+      - TZ=Asia/Tokyo
