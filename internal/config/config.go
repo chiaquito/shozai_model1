@@ -31,7 +31,7 @@ func New() *config {
 }
 
 type dbConf struct {
-	Host     string `env:"DB_HOST" envDefault:"db"`
+	Host     string `env:"DB_HOST" envDefault:"localhost"`
 	Port     string `env:"DM_PORT" envDefault:"3306"`
 	Name     string `env:"DB_NAME" envDefault:"db"`
 	User     string `env:"DB_USER" envDefault:"root"`

@@ -5,6 +5,7 @@ import (
 
 	echo "github.com/labstack/echo/v4"
 
+	"shozai_model1/internal/pkg/errors"
 	"shozai_model1/internal/usecase"
 )
 
@@ -37,7 +38,12 @@ func (h *company) ListCompany(c echo.Context) error {
 func (h *company) CreateCompany(c echo.Context) error {
 	res, err := h.uc.CreateCompany(c)
 	if err != nil {
-		return err
+		if errors.IsBusinessError(err) {
+			return c.JSON(http.StatusInternalServerError, err)
+		}
+		if errors.IsSystemError(err) {
+			return c.JSON(http.StatusInternalServerError, err)
+		}
 	}
 	return c.JSON(http.StatusOK, res)
 }
@@ -53,7 +59,15 @@ func (h *company) BulkCreateCompany(c echo.Context) error {
 func (h *company) UpdateCompany(c echo.Context) error {
 	res, err := h.uc.UpdateCompany(c)
 	if err != nil {
-		return err
+		if errors.IsOptimisticLockingError(err) {
+			return c.JSON(http.StatusConflict, err)
+		}
+		if errors.IsBusinessError(err) {
+			return c.JSON(http.StatusInternalServerError, err)
+		}
+		if errors.IsSystemError(err) {
+			return c.JSON(http.StatusInternalServerError, err)
+		}
 	}
 	return c.JSON(http.StatusOK, res)
 }
