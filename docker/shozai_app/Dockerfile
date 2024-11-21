@@ -23,5 +23,6 @@ ENTRYPOINT [ "air", "-c", ".air.toml"]
 FROM golang:1.23 AS prod
 WORKDIR /home/shozai_model
 COPY [".", "/home/shozai_model/"]
-
-CMD ["go", "run", "main.go"]
+RUN go mod download
+RUN GOOS=linux GOARCH=amd64 go build -o ./dist/main .
+CMD ["./dist/main"]

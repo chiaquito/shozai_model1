@@ -11,5 +11,5 @@ type health struct {
 
 func (h *health) HealthCheck(c echo.Context) error {
 
-	return c.JSON(http.StatusOK, "heathcheck")
+	return c.JSON(http.StatusOK, "healthcheck")
 }
