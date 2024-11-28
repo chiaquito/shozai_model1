@@ -5,6 +5,7 @@ import (
 
 	echo "github.com/labstack/echo/v4"
 
+	"shozai_model1/internal/pkg/context"
 	"shozai_model1/internal/pkg/errors"
 	"shozai_model1/internal/usecase"
 )
@@ -20,7 +21,8 @@ func NewCompany(u usecase.Usecase) *company {
 }
 
 func (h *company) GetCompanyByID(c echo.Context) error {
-	res, err := h.uc.GetCompanyByID(c)
+	ctx := context.NewContext(c)
+	res, err := h.uc.GetCompanyByID(ctx)
 	if err != nil {
 		return err
 	}
@@ -28,7 +30,8 @@ func (h *company) GetCompanyByID(c echo.Context) error {
 }
 
 func (h *company) ListCompany(c echo.Context) error {
-	res, err := h.uc.ListCompany(c)
+	ctx := context.NewContext(c)
+	res, err := h.uc.ListCompany(ctx)
 	if err != nil {
 		return err
 	}
@@ -36,7 +39,8 @@ func (h *company) ListCompany(c echo.Context) error {
 }
 
 func (h *company) CreateCompany(c echo.Context) error {
-	res, err := h.uc.CreateCompany(c)
+	ctx := context.NewContext(c)
+	res, err := h.uc.CreateCompany(ctx)
 	if err != nil {
 		if errors.IsBusinessError(err) {
 			return c.JSON(http.StatusInternalServerError, err)
@@ -49,7 +53,8 @@ func (h *company) CreateCompany(c echo.Context) error {
 }
 
 func (h *company) BulkCreateCompany(c echo.Context) error {
-	res, err := h.uc.BulkCreateCompany(c)
+	ctx := context.NewContext(c)
+	res, err := h.uc.BulkCreateCompany(ctx)
 	if err != nil {
 		return err
 	}
@@ -57,7 +62,8 @@ func (h *company) BulkCreateCompany(c echo.Context) error {
 }
 
 func (h *company) UpdateCompany(c echo.Context) error {
-	res, err := h.uc.UpdateCompany(c)
+	ctx := context.NewContext(c)
+	res, err := h.uc.UpdateCompany(ctx)
 	if err != nil {
 		if errors.IsOptimisticLockingError(err) {
 			return c.JSON(http.StatusConflict, err)
