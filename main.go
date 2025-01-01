@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/go-playground/validator"
+	"github.com/labstack/echo/v4/middleware"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 
@@ -44,6 +45,10 @@ func main() {
 	e := route.NewRouter(h)
 
 	e.Validator = &Validator{validator: validator.New()}
+
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"http://localhost:1323"},
+	}))
 
 	e.Logger.Fatal(e.Start(":1323"))
 
