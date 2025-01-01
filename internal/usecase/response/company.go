@@ -9,8 +9,8 @@ type Company struct {
 	ID              int64   `json:"id"`
 	Version         int64   `json:"version"`
 	Name            string  `json:"name"`
-	EstablishedDate *string `json:"established_date"`
-	CreatedUserID   int64   `json:"created_user_id"`
+	EstablishedDate *string `json:"establishedDate"`
+	CreatedUserID   int64   `json:"createdUserId"`
 }
 
 func ToCompany(m *table_model.Company) *Company {

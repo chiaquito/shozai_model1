@@ -9,10 +9,10 @@ import (
 type BaseModel struct {
 	ID            int       `gorm:"primarykey" json:"id"`
 	Version       int       `gorm:"default:1" json:"version"`
-	CreatedUserID int       `json:"created_user_id"`
-	CreatedAt     time.Time `json:"created_at"`
-	UpdatedUserID int       `json:"updated_user_id"`
-	UpdatedAt     time.Time `json:"updated_at"`
+	CreatedUserID int       `json:"createdUserId"`
+	CreatedAt     time.Time `json:"createdAt"`
+	UpdatedUserID int       `json:"updatedUserId"`
+	UpdatedAt     time.Time `json:"updatedAt"`
 }
 
 // gorm hooks
