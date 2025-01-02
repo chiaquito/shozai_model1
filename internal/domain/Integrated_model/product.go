@@ -10,6 +10,6 @@ type Product struct {
 	CompanyEstablishedDate string `gorm:"column:company_established_date"`
 }
 
-func (t Product) TableName() string {
+func (m Product) TableName() string {
 	return "product"
 }
