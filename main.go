@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/go-playground/validator"
@@ -27,6 +28,7 @@ func main() {
 
 	conf := config.New()
 
+	fmt.Println(conf.DB.FormatDSN())
 	db, err := gorm.Open(mysql.Open(conf.DB.FormatDSN()), conf.Gorm)
 	if err != nil {
 		log.Fatalf("Error opening database: %v", err)
