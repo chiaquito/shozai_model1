@@ -51,13 +51,14 @@ func newDBConf() (*mysql.Config, error) {
 		return nil, err
 	}
 	return &mysql.Config{
-		DBName:    dbCfg.Name,
-		User:      dbCfg.User,
-		Passwd:    dbCfg.PassWord,
-		Addr:      fmt.Sprintf("%s:%s", dbCfg.Host, dbCfg.Port),
-		Net:       "tcp",
-		ParseTime: true,
-		Collation: "utf8mb4_unicode_ci",
-		Loc:       jst,
+		DBName:               dbCfg.Name,
+		User:                 dbCfg.User,
+		Passwd:               dbCfg.PassWord,
+		Addr:                 fmt.Sprintf("%s:%s", dbCfg.Host, dbCfg.Port),
+		Net:                  "tcp",
+		ParseTime:            true,
+		Collation:            "utf8mb4_unicode_ci",
+		Loc:                  jst,
+		AllowNativePasswords: true,
 	}, nil
 }
