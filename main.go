@@ -47,7 +47,7 @@ func main() {
 	e.Validator = &Validator{validator: validator.New()}
 
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: []string{"http://localhost:1323"},
+		AllowOrigins: conf.CORS.AllowOrigins,
 	}))
 
 	e.Logger.Fatal(e.Start(":1323"))

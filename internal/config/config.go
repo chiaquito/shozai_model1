@@ -12,6 +12,7 @@ import (
 type config struct {
 	DB   *mysql.Config
 	Gorm *gorm.Config
+	CORS *corsConf
 }
 
 func New() *config {
@@ -23,10 +24,15 @@ func New() *config {
 	gormConf := &gorm.Config{
 		CreateBatchSize: 1000,
 	}
+	corsConf, err := newCORSConf()
+	if err != nil {
+		fmt.Println(err)
+	}
 
 	return &config{
 		DB:   dbConf,
 		Gorm: gormConf,
+		CORS: corsConf,
 	}
 }
 
@@ -61,4 +67,18 @@ func newDBConf() (*mysql.Config, error) {
 		Loc:                  jst,
 		AllowNativePasswords: true,
 	}, nil
+}
+
+type corsConf struct {
+	AllowOrigins []string `env:"ALLOW_ORIGINS" envSeparator:"," envDefault:"http://localhost:1323"`
+}
+
+func newCORSConf() (*corsConf, error) {
+	var corsConf corsConf
+	if err := env.Parse(&corsConf); err != nil {
+		fmt.Println(err)
+		return nil, err
+	}
+
+	return &corsConf, nil
 }
